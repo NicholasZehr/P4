@@ -1,13 +1,17 @@
-//**************************************************************************************************************
+//********************************************************************************
 // CLASS: Expression
 //
-// AUTHOR
-// Kevin R. Burger (burgerk@asu.edu)
-// Computer Science & Engineering Program
-// Fulton Schools of Engineering
-// Arizona State University, Tempe, AZ 85287-8809
-// http://www.devlang.com
-//**************************************************************************************************************
+// DESCRIPTION
+// The Expression class for Project 4.
+//
+// COURSE AND PROJECT INFORMATION
+// CSE205 Object Oriented Programming and Data Structures, A-2022
+// Project Number: P4
+//
+//  * AUTHOR: Zehr, Nicholas
+// Asuriteid:1219718305
+// Email: nicholas.zehr@icloud.com
+//********************************************************************************
 
 /**
  * Represents an infix expression to be evaluated.
@@ -18,6 +22,7 @@ public class Expression {
      * A queue which stores the tokens of the infix expression in the order in which they were input.
      */
     Queue<Token> mTokenQueue;
+
 
     /**
      * Expression(String)
@@ -45,7 +50,20 @@ public class Expression {
      *     token = call tokenizer.nextToken()
      * End While
      */
-    ???
+    public Expression(String pExprStr) {
+        setTokenQueue(new Queue<Token>());
+        Tokenizer tokenizer = new Tokenizer(pExprStr);
+        Token prevToken = null;
+        Token token = tokenizer.nextToken();        
+        while (token != null) {
+            if (token instanceof SubOperator) {
+                token = negationCheck(token, prevToken);
+            }
+            getTokenQueue().enqueue(token);
+            prevToken = token;
+            token = tokenizer.nextToken();
+        }
+    }
 
     /**
      * Evaluates the expression and returns the result as a Double.
@@ -60,12 +78,12 @@ public class Expression {
      *     ElseIf token instanceof LeftParen Then
      *         Push token onto the operator stack (type cast token to LeftParen)
      *     ElseIf token instanceof RightParen Then
-     *         While the operator on the top of the operator stack is not an instanceof LeftParen Do
+     *         While the operator on the top of the operator stack is not an            instanceof LeftParen Do
      *             Call topEval(operatorStack, operandStack)
      *         End While
-     *         Pop the top operator from the operator stack -- removes the LeftParen
+     *     Pop the top operator from the operator stack -- removes the LeftParen
      *     Else
-     *         Declare Operator object named operator and assign token to it (type cast to Operator)
+     *Declare Operator object named operator and assign token to it (type cast to Operator)
      *         While keepEvaluating(operatorStack, operator) is true Do
      *             Call topEval(operatorStack, operandStack)
      *         EndWhile
@@ -77,7 +95,34 @@ public class Expression {
      * End While
      * Pop the top Operand from the operand stack and return its value (call getValue() on the Operand).
      */
-    ???
+    public Double evaluate() {
+        Stack<Operator> operatorStack = new Stack<>();
+        Stack<Operand> operandStack = new Stack<>();
+        while (!mTokenQueue.isEmpty()) {
+            Token token = getTokenQueue().dequeue();
+            if (token instanceof Operand) {
+                operandStack.push((Operand) token);
+            } else if (token instanceof LeftParen) {
+                operatorStack.push((LeftParen) token);
+            } else if (token instanceof RightParen) {
+                while (!(operatorStack.peek() instanceof LeftParen)) {
+                    topEval(operatorStack, operandStack);
+                }
+                operatorStack.pop();
+            }
+            else {
+                Operator operator = (Operator) token;
+                while (keepEvaluating(operatorStack, operator)){
+                    topEval(operatorStack, operandStack);
+                    operatorStack.push(operator);
+                }
+            }
+        }
+        while (!operatorStack.isEmpty()) {
+            topEval(operatorStack, operandStack);
+        }
+        return operandStack.pop().getValue();
+    }
 
     /**
      * Accessor method for mTokenQueue.
@@ -143,6 +188,16 @@ public class Expression {
      *     Push the returned Operand from the above statement onto the operand stack
      * End If
      */
-    ???
+    private void topEval(Stack<Operator> pOperatorStack, Stack<Operand> pOperandStack) {
+        Operand right = pOperandStack.pop();
+        Operator operator = pOperatorStack.pop();
+        if (operator instanceof UnaryOperator) {
+            pOperandStack.push(((UnaryOperator) operator).evaluate(right));
+        }
+        else {
+            Operand left = pOperandStack.pop();
+            pOperandStack.push(((BinaryOperator) operator).evaluate(left, right));
+        }
+    } 
 
 }

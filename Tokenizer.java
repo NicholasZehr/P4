@@ -1,14 +1,17 @@
-//**************************************************************************************************************
+//********************************************************************************
 // CLASS: Tokenizer
 //
-// AUTHOR
-// Kevin R. Burger (burgerk@asu.edu)
-// Computer Science & Engineering Program
-// Fulton Schools of Engineering
-// Arizona State University, Tempe, AZ 85287-8809
-// Web: http://www.devlang.com
-//**************************************************************************************************************
-
+// DESCRIPTION
+// The Tokenizer class for Project 4.
+//
+// COURSE AND PROJECT INFORMATION
+// CSE205 Object Oriented Programming and Data Structures, A-2022
+// Project Number: P4
+//
+//  * AUTHOR: Zehr, Nicholas
+// Asuriteid:1219718305
+// Email: nicholas.zehr@icloud.com
+//********************************************************************************
 /**
  * The Tokenizer class scans a string containing an infix expression and breaks it into tokens. For this project,
  * a token will be either an Operand (a double value), a LeftParen or RightParen, or an arithmetic UnaryOperator

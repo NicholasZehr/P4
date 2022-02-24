@@ -43,19 +43,23 @@ public class View extends JFrame implements ActionListener {
      */
     public View(Main pMain) {
         // Save a reference to the Main object pMain in mMain.
-        ???
+        mMain = pMain;
 
         // PSEUDOCODE:
         // Declare and create a JPanel named panelLabel using the default FlowLayout layout manager.
         // Create mResultLabel as a JLabel initialized to the empty string ""
         // Add mResultLabel to panelLabel
-        ???
+        JPanel panelLabel = new JPanel();
+        mResultLabel = new JLabel("");
+        add(mResultLabel);
 
         // PSEUDOCODE:
         // Declare and create a JPanel named panelInput using the default FlowLayout layout manager.
         // Create mInputText as a JTextField initialized to 40 columns wide
         // Add mInputText to panelInput
-        ???
+        JPanel panelInput = new JPanel();
+        mInputText = new JTextField(40);
+        add(mInputText);
 
         // PSEUDOCODE:
         // Create a JPanel named panelButtons using FlowLayout.
@@ -64,7 +68,9 @@ public class View extends JFrame implements ActionListener {
         // Add the  Clear button to the panel.
         // Repeat the three above statements for the Evalute button.
         // Repeat the three above statements for the Exit button.
-        ???
+        JPanel panelButttons = new JPanel();
+        mClearButton = new JButton("Clear");
+        mClearButton.addActionListener(this);
 
         // PSEUDOCODE
         // Create a JPanel named panelMain using a vertical BoxLayout.
