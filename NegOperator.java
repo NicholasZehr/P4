@@ -31,7 +31,7 @@ public class NegOperator extends UnaryOperator{
      */
     @Override
     public int precedence() {
-        return 2;
+        return 4;
     }
 
     /**
@@ -39,7 +39,7 @@ public class NegOperator extends UnaryOperator{
      */
     @Override
     public int stackPrecedence() {
-        return 2;
+        return 4;
     }
     
 }
