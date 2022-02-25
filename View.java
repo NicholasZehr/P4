@@ -53,7 +53,7 @@ public class View extends JFrame implements ActionListener {
         // Add mResultLabel to panelLabel
         JPanel panelLabel = new JPanel();
         mResultLabel = new JLabel("");
-        add(mResultLabel);
+        panelLabel.add(mResultLabel);
 
         // PSEUDOCODE:
         // Declare and create a JPanel named panelInput using the default FlowLayout layout manager.
@@ -61,7 +61,7 @@ public class View extends JFrame implements ActionListener {
         // Add mInputText to panelInput
         JPanel panelInput = new JPanel();
         mInputText = new JTextField(40);
-        add(mInputText);
+        panelInput.add(mInputText);
 
         // PSEUDOCODE:
         // Create a JPanel named panelButtons using FlowLayout.
@@ -77,9 +77,9 @@ public class View extends JFrame implements ActionListener {
         mClearButton.addActionListener(this);
         mEvalButton.addActionListener(this);
         mExitButton.addActionListener(this);
-        add(mClearButton);
-        add(mEvalButton);
-        add(mExitButton);
+        panelButtons.add(mClearButton);
+        panelButtons.add(mEvalButton);
+        panelButtons.add(mExitButton);
 
         // PSEUDOCODE
         // Create a JPanel named panelMain using a vertical BoxLayout.
@@ -89,10 +89,10 @@ public class View extends JFrame implements ActionListener {
         // Add panelButtons to panelMain.
         JPanel panelMain = new JPanel();
         panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.Y_AXIS));
-        add(Box.createVerticalGlue());
-        add(panelLabel);
-        add(panelInput);
-        add(panelButtons);
+        panelMain.add(Box.createVerticalGlue());
+        panelMain.add(panelLabel);
+        panelMain.add(panelInput);
+        panelMain.add(panelButtons);
 
         setTitle("Kalkutron-9001");
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
