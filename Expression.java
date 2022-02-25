@@ -114,8 +114,8 @@ public class Expression {
                 Operator operator = (Operator) token;
                 while (keepEvaluating(operatorStack, operator)){
                     topEval(operatorStack, operandStack);
-                    operatorStack.push(operator);
                 }
+                operatorStack.push(operator);
             }
         }
         while (!operatorStack.isEmpty()) {
