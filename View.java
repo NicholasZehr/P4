@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import javafx.scene.chart.Axis;
+
 /**
  * The View class implements the GUI.
  */
@@ -68,9 +70,16 @@ public class View extends JFrame implements ActionListener {
         // Add the  Clear button to the panel.
         // Repeat the three above statements for the Evalute button.
         // Repeat the three above statements for the Exit button.
-        JPanel panelButttons = new JPanel();
+        JPanel panelButtons = new JPanel();
         mClearButton = new JButton("Clear");
+        mEvalButton = new JButton("Evaluate");
+        mExitButton = new JButton("Exit");
         mClearButton.addActionListener(this);
+        mEvalButton.addActionListener(this);
+        mExitButton.addActionListener(this);
+        add(mClearButton);
+        add(mEvalButton);
+        add(mExitButton);
 
         // PSEUDOCODE
         // Create a JPanel named panelMain using a vertical BoxLayout.
@@ -78,7 +87,12 @@ public class View extends JFrame implements ActionListener {
         // Add panelLabel to panelMain.
         // Add panelInput to panelMain.
         // Add panelButtons to panelMain.
-        ???
+        JPanel panelMain = new JPanel();
+        panelMain.setLayout(new BoxLayout(panelMain, BoxLayout.Y_AXIS));
+        add(Box.createVerticalGlue());
+        add(panelLabel);
+        add(panelInput);
+        add(panelButtons);
 
         setTitle("Kalkutron-9001");
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -102,13 +116,26 @@ public class View extends JFrame implements ActionListener {
      *     Call exit() on mMain.
      * End If
      */
-    ???
+    public void actionPerformed(ActionEvent pEvent) {
+        if (pEvent.getSource() == mClearButton) {
+            clear();
+        }
+        else if (pEvent.getSource() == mEvalButton) {
+            evaluate();
+        }
+        else if (pEvent.getSource() == mExitButton) {
+            mMain.exit();
+        }
+    }
 
     /**
      * clear() is called when the Clear button is clicked. Set the text in mInputText and mResultLabel to the
      * empty strings "".
      */
-    ???
+    private void clear() {
+        mInputText.setText("");
+        mResultLabel.setText("");
+    }
 
     /**
      * evaluate() is called when the Evaluate button is clicked.
@@ -119,7 +146,11 @@ public class View extends JFrame implements ActionListener {
      * Call expr.evaluate() and assign the return value a Double object named result
      * Display result in mResultLabel (call toString on result)
      */
-    ???
+    private void evaluate() {
+        Expression expr = new Expression(mInputText.getText());
+        Double result = expr.evaluate();
+        mResultLabel.setText(result.toString());
+    }
 
     /**
      * messageBox()
