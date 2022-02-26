@@ -1,8 +1,8 @@
 //********************************************************************************
-// CLASS: DList
+// CLASS: Queue
 //
 // DESCRIPTION
-// The Dlist class for Project 4.
+// The Queue class for Project 4.
 //
 // COURSE AND PROJECT INFORMATION
 // CSE205 Object Oriented Programming and Data Structures, A-2022

@@ -1,8 +1,8 @@
 //********************************************************************************
-// CLASS: Operator
+// CLASS: UnaryOperator
 //
 // DESCRIPTION
-// The Operator class for Project 4.
+// The UnaryOperator class for Project 4.
 //
 // COURSE AND PROJECT INFORMATION
 // CSE205 Object Oriented Programming and Data Structures, A-2022
